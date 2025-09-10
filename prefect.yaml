@@ -1,0 +1,7 @@
+# prefect.yaml
+deployments:
+  - name: etl_filters_deployment
+    entrypoint: etl_prefect.py:etl_flow
+    work_pool: "default-agent-pool"    # Cambia por tu pool en Prefect Cloud
+    parameters:
+      input_file: "input.csv"  

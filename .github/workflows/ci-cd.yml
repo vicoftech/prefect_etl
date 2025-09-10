@@ -1,0 +1,35 @@
+name: CI/CD for Prefect ETL Filters
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: pytest
+
+    - name: Login to Prefect Cloud
+      run: prefect cloud login --key ${{ secrets.PREFECT_API_KEY }} --workspace ${{ secrets.PREFECT_WORKSPACE }}
+
+    - name: Deploy to Prefect Cloud
+      run: prefect deploy --all
+
+    # OPCIONAL: ejecutar el flujo automáticamente tras el deploy
+    - name: Run flow
+      run: prefect deployment run 'etl_flow/etl_filters_deployment'

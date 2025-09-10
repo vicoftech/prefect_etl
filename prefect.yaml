@@ -16,6 +16,7 @@ deployments:
           - apt-get update && apt-get install -y git && apt-get clean
           # Clonar repo privado usando token
           - git clone https://$GIT_TOKEN@github.com/vicoftech/prefect_etl.git .
+          - cd /app
           # Instalar dependencias
           - pip install --no-cache-dir -r requirements.txt
     parameters:

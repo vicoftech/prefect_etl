@@ -10,4 +10,6 @@ def test_plot_jurisdiccion():
         {"name": "Bob", "age": 20, "jurisdiccion": "Cordoba"},
     ])
     outputs = group_by_jurisdiccion.fn(df)  # .fn ejecuta la función del task
+    print(outputs.head())
     assert 'jurisdiccion' in outputs
+    

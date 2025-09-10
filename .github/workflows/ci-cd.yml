@@ -30,6 +30,12 @@ jobs:
     - name: Deploy to Prefect Cloud
       run: prefect deploy --all
 
+        # 🔹 levantar worker ANTES de correr el flow
+    - name: Start Prefect Worker
+      run: |
+        nohup prefect worker start -p "default-agent-pool" &
+        sleep 15  # darle tiempo a conectarse a la cloud
+
     # OPCIONAL: ejecutar el flujo automáticamente tras el deploy
     - name: Run flow
       run: prefect deployment run 'ETL con plot de jurisdiccion/etl_filters_deployment'

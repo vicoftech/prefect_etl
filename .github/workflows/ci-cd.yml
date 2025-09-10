@@ -2,7 +2,7 @@ name: CI/CD for Prefect ETL Filters
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
 
 jobs:
   build-test-deploy:

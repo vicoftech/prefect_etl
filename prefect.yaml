@@ -9,3 +9,5 @@ deployments:
       -prefect.deployments.steps.git_clone:
         repository: "https://github.com/tuusuario/prefect_etl.git"
         branch: "dev"
+      -prefect.deployments.steps.run:
+        command: "pip install -r requirements.txt"

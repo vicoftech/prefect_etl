@@ -32,4 +32,4 @@ jobs:
 
     # OPCIONAL: ejecutar el flujo automáticamente tras el deploy
     - name: Run flow
-      run: prefect deployment run 'etl_flow/etl_filters_deployment'
+      run: prefect deployment run 'ETL con plot de jurisdiccion/etl_filters_deployment'

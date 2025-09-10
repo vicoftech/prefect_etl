@@ -12,5 +12,5 @@ deployments:
           repository: "https://$GIT_TOKEN@github.com/vicoftech/prefect_etl.git"
           branch: "dev"
       - prefect.deployments.steps.run:
-          command: "pip install -r requirements.txt
+          command: "pip install -r requirements.txt"
 

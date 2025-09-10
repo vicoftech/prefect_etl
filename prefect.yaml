@@ -5,3 +5,7 @@ deployments:
       name: "default-agent-pool"
     parameters:
       input_file: "input.csv"  # Cambia por tu pool en Prefect Cloud
+    pull:
+      -prefect.deployments.steps.git_clone:
+        repository: "https://github.com/tuusuario/prefect_etl.git"
+        branch: "dev"

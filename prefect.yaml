@@ -3,11 +3,20 @@ deployments:
     entrypoint: etl_prefect.py:etl_flow
     work_pool:
       name: "default-agent-pool"
+    infrastructure:
+      type: "docker"
+      image: "python:3.11-slim"
+      env:
+        # Token de GitHub como variable de entorno
+        - GIT_TOKEN=${GIT_TOKEN}
+        - PIP_NO_CACHE_DIR=1
+      build:
+        commands:
+          # Instalar git y pip
+          - apt-get update && apt-get install -y git && apt-get clean
+          # Clonar repo privado usando token
+          - git clone https://$GIT_TOKEN@github.com/vicoftech/prefect_etl.git .
+          # Instalar dependencias
+          - pip install --no-cache-dir -r requirements.txt
     parameters:
-      input_file: "input.csv"  # Cambia por tu pool en Prefect Cloud
-    pull:
-      -prefect.deployments.steps.git_clone:
-        repository: "https://github.com/tuusuario/prefect_etl.git"
-        branch: "dev"
-      -prefect.deployments.steps.run:
-        command: "pip install -r requirements.txt"
+      input_file: "input.csv"
